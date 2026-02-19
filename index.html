@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Library Management System</title>
+    <link rel="stylesheet" href="style.css">
+    <script src="script.js"></script>
+</head>
+<body>
+
+    <div id="login-page" class="container">
+        <h2>Library Management System</h2>
+        <input type="text" id="username" placeholder="User ID">
+        <input type="password" id="password" placeholder="Password">
+        <div class="btn-group">
+            <button class="cancel">Cancel</button>
+            <button onclick="login()">Login</button>
+        </div>
+    </div>
+   
+    <div id="home-page" class="container hidden">
+       <nav>
+           <span class="nav-item" onclick="switchModule('maintenance')">Maintenance</span> | 
+           <span class="nav-item" onclick="switchModule('reports')">Reports</span> | 
+           <span class="nav-item active" onclick="switchModule('transactions')">Transactions</span>
+           <button class="logout" onclick="logout()">Log Out</button>
+        </nav>
+        
+        <div class="main-layout">
+            <aside>     
+                <ul>
+                    <li onclick="showPage('availability-page')">Is book available?</li>
+                    <li onclick="showPage('issue-page')">Issue book?</li>
+                    <li onclick="showPage('return-page')">Return book?</li>
+                    <li onclick="showPage('fine-page')">Pay Fine?</li>
+    </ul>
+</aside>
+            
+
+            <section id="availability-page" style="display:none;">
+    <h3>Book Availability</h3>
+    
+    <label>Enter Book Name</label>
+    <select id="avail-book-name">
+        <option value="">Select Book</option>
+        <option value="science">Science Vol 1</option>
+        <option value="econ">Economics Basics</option>
+    </select>
+
+    <label>Enter Author</label>
+    <select id="avail-author-name">
+        <option value="">Select Author</option>
+        <option value="smith">Dr. Smith</option>
+        <option value="knight">Prof. Knight</option>
+    </select>
+
+    <div class="btn-group">
+        <button class="cancel" onclick="showPage('issue-page')">Back</button>
+        <button class="confirm" onclick="validateAndSearch()">Search</button>
+    </div>
+</section>
+<section id="return-page" style="display:none;">
+    <h3>Return Book</h3>
+    
+    <label>Name of Book</label>
+    <input type="text" id="return-book-name" placeholder="Name of book required">
+
+    <label>Author Name</label>
+    <input type="text" id="return-author" readonly placeholder="Auto-populated">
+
+    <label>Serial Number</label>
+    <input type="text" id="return-serial" readonly placeholder="Auto-populated">
+
+    <label>Issue Date</label>
+    <input type="date" id="return-issue-date" readonly>
+
+    <label>Return Date</label>
+    <input type="date" id="return-actual-date">
+
+    <div class="btn-group">
+        <button class="cancel" onclick="showPage('issue-page')">Cancel</button>
+        <button class="confirm" onclick="processReturn()">Confirm</button>
+    </div>
+</section>
+<section id="fine-page" style="display:none;">
+    <h3>Pay Fine</h3>
+    
+    <label>Book Name</label>
+    <input type="text" id="fine-book-name" readonly>
+
+    <label>Author Name</label>
+    <input type="text" id="fine-author-name" readonly>
+
+    <label>Fine Amount (Rs.)</label>
+    <input type="number" id="fine-amount" readonly>
+
+    <div style="margin: 15px 0;">
+        <input type="checkbox" id="fine-paid-check">
+        <label style="display:inline;">Fine Paid?</label>
+    </div>
+
+    <label>Remarks</label>
+    <textarea id="fine-remarks" placeholder="Optional"></textarea>
+
+    <div class="btn-group">
+        <button class="cancel" onclick="showPage('return-page')">Back</button>
+        <button class="confirm" onclick="completeFinePayment()">Confirm</button>
+    </div>
+</section>
+            <section class="form-area">
+                <h3>Book Issue</h3>
+                <label>Enter Book Name</label>
+                <select id="bookName">
+                    <option>Select Book</option>
+                    <option>Science Vol 1</option>
+                    <option>Economics Basics</option>
+                </select>
+
+                <label>Enter Author</label>
+                <input type="text" placeholder="Author Name" readonly>
+
+                <label>Issue Date</label>
+                <input type="date">
+
+                <label>Return Date</label>
+                <input type="date">
+
+                <label>Remarks</label>
+                <textarea placeholder="Optional"></textarea>
+
+                <div class="btn-group">
+                    <button class="cancel">Cancel</button>
+                    <button class="confirm" onclick="alert('Book Issued!')">Confirm</button>
+                </div>
+            </section>
+            <section id="issue-page" class="content-active">
+   <h3>Book Issue</h3>
+   </section>
+
+        </div>
+    </div>
+
+    
+</body>
+</html>
